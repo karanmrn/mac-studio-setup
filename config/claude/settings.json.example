@@ -1,0 +1,13 @@
+{
+  "env": {
+    "ENABLE_TOOL_SEARCH": "true"
+  },
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "statusLine": {
+    "command": "bash",
+    "args": ["$HOME/.claude/statusline.sh"]
+  },
+  "_comment": "Full settings on the MacBook are large (hooks, skillOverrides, allow rules). Copy hooks from firstmate backup or dotfiles after install. Never commit API keys or tokens."
+}

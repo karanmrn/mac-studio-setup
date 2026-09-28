@@ -1,0 +1,52 @@
+# Sanitized template from captain's ~/.no-mistakes/config.yaml (Sep 2026).
+# Copy to ~/.no-mistakes/config.yaml after install.
+
+agent: [cursor, codex, claude]
+
+ci_timeout: "168h"
+step_quiet_warning: "10m"
+agent_timeout: "120m"
+review_agent_timeout: "120m"
+test_agent_timeout: "120m"
+session_reuse: true
+log_level: info
+
+auto_fix:
+  rebase: 3
+  lint: 3
+  test: 3
+  review: 0
+  document: 3
+  ci: 3
+
+ci:
+  rerun_transient: 0
+  revalidate_repairs: false
+
+intent:
+  enabled: true
+  threshold: 0.2
+  slack_days: 3
+
+eval:
+  capture_provenance: true
+  auto_capture: true
+  max_cases: 200
+  diversified_size: 32
+
+agent_config:
+  codex:
+    effort: high
+  pi:
+    model: openrouter/nvidia/nemotron-3.5-lightning:free
+    effort: high
+  grok:
+    model: grok-4.6
+    effort: high
+  claude:
+    model: opus
+    effort: high
+
+acp_registry_overrides:
+  prime-glm: prime-agent --mode acp --no-skills --model openrouter/z-ai/glm-5.3 --thinking high
+  prime-union: prime-agent --mode acp --no-skills --model openrouter/stealth/union-alpha --thinking high
