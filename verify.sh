@@ -82,6 +82,26 @@ else
   check "claude statusline" 0 ""
 fi
 
+GLOBAL_AGENTS="$DOTFILES_DIR/home/.config/agents/AGENTS.md"
+if [ -f "$GLOBAL_AGENTS" ]; then
+  ok=1
+  detail=""
+  for link in \
+    "$HOME/.config/agents/AGENTS.md" \
+    "$HOME/.codex/AGENTS.md" \
+    "$HOME/.grok/AGENTS.md" \
+    "$HOME/.config/opencode/AGENTS.md"; do
+    if [ ! -L "$link" ]; then
+      ok=0
+      detail="missing $link"
+      break
+    fi
+  done
+  check "global AGENTS symlinks" "$ok" "$detail"
+else
+  check "global AGENTS symlinks" 0 "missing $GLOBAL_AGENTS"
+fi
+
 if [ -f "$FM_HOME/data/deck/quota.sh" ]; then
   check "quota deck script" 1 ""
 else
