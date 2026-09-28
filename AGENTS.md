@@ -1,6 +1,6 @@
 # Project agent memory
 
-This file is the project's committed home for project-intrinsic agent knowledge: build, test, release, architecture, and sharp-edge notes that should travel with the code.
+Bootstrap and migration repo for the captain's Mac Studio. Human docs live under `docs/` (start with README table of contents). Install entrypoint: `install.sh`; daily updates: `scripts/update-all.sh`.
 
 - Add durable project-specific notes here as they are discovered through real work.
 

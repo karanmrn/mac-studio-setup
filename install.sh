@@ -57,6 +57,22 @@ if [ -x "$DOTFILES_DIR/install.sh" ]; then
   run "'$DOTFILES_DIR/install.sh'"
 fi
 
+# --- Global AGENTS.md symlinks (shared Codex, Grok, OpenCode, Claude; Kunchen pattern) ---
+GLOBAL_AGENTS="$DOTFILES_DIR/home/.config/agents/AGENTS.md"
+if [ -f "$GLOBAL_AGENTS" ]; then
+  run "mkdir -p '$HOME/.config/agents' '$HOME/.codex' '$HOME/.grok' '$HOME/.config/opencode' '$HOME/.claude'"
+  for dest in \
+    "$HOME/.config/agents/AGENTS.md" \
+    "$HOME/.codex/AGENTS.md" \
+    "$HOME/.grok/AGENTS.md" \
+    "$HOME/.config/opencode/AGENTS.md" \
+    "$HOME/.claude/CLAUDE.md"; do
+    run "ln -sfn '$GLOBAL_AGENTS' '$dest'"
+  done
+else
+  log "warn: missing $GLOBAL_AGENTS (dotfiles not installed yet)"
+fi
+
 # --- Brewfile from this repo ---
 if [ -f "$REPO_ROOT/Brewfile" ]; then
   run "HOMEBREW_NO_AUTO_UPDATE=1 brew bundle install --file='$REPO_ROOT/Brewfile'"
