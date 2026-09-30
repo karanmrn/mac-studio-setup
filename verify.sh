@@ -108,6 +108,12 @@ else
   check "quota deck script" 0 "copy from repo config/deck"
 fi
 
+if [ -f "$HOME/.config/herdr/config.toml" ] || [ -L "$HOME/.config/herdr/config.toml" ]; then
+  check "herdr config.toml" 1 ""
+else
+  check "herdr config.toml" 0 "dotfiles install.sh or install.sh config/herdr copy"
+fi
+
 # Firstmate
 if [ -d "$FM_HOME/.git" ]; then
   check "firstmate clone" 1 "$FM_HOME"
