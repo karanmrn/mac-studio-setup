@@ -18,7 +18,10 @@ Dry run: `INSTALL_DRY_RUN=1 ~/mac-studio-setup/install.sh`
 
 | Doc | Contents |
 |-----|----------|
+| [sol6.md](sol6.md) | Fleet handover: executed work, queue, Studio cutover |
 | [docs/MIGRATION.md](docs/MIGRATION.md) | MacBook → Studio checklist, sign-ins, projects |
+| [docs/HERDR.md](docs/HERDR.md) | Exact Herdr + WezTerm setup and command deck |
+| [docs/INSTALL-INVENTORY.md](docs/INSTALL-INVENTORY.md) | Every package and install command |
 | [docs/AGENT-INSTRUCTIONS.md](docs/AGENT-INSTRUCTIONS.md) | Global vs firstmate vs pubmax `AGENTS.md` layering |
 | [docs/SKILLS.md](docs/SKILLS.md) | Full skill inventory by upstream (generated from lock file) |
 | [docs/KUNCHEN-STACK.md](docs/KUNCHEN-STACK.md) | Kunchen Guid tools, dotfiles credit, optional nix |

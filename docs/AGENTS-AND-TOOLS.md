@@ -1,25 +1,35 @@
 # Agent CLIs — versions and install paths (MacBook inventory Sep 2026)
 
+Reference versions after `scripts/update-all.sh` on **29 Sep 2026** (`data/deck/update-all.log`). Full install commands: [INSTALL-INVENTORY.md](INSTALL-INVENTORY.md).
+
 | Tool | Version (reference) | Path | Install method |
 |------|---------------------|------|----------------|
-| Claude Code | 2.1.283 | `/opt/homebrew/bin/claude` | `brew install --cask claude-code@latest` |
-| Codex | 0.157.1 | `~/.local/bin/codex` | `npm install -g @openai/codex` |
-| cursor-agent | 2026.09.26 | `~/.local/bin/cursor-agent` | `curl -fsSL https://cursor.com/install \| bash` |
+| Homebrew | 6.0.1 | `/opt/homebrew/bin/brew` | brew installer |
+| GitHub CLI | 2.101.0 | `/opt/homebrew/bin/gh` | `brew install gh` |
+| Claude Code | 2.1.285 | `/opt/homebrew/bin/claude` | `brew install --cask claude-code@latest` |
+| Codex | 0.158.0 | `~/.local/bin/codex` | `npm install -g @openai/codex` |
+| cursor-agent | 2026.09.28 | `~/.local/bin/cursor-agent` | `curl -fsSL https://cursor.com/install \| bash` |
 | Grok | 1.0.41 | `~/.grok/bin/grok` | `npm install -g @xai-official/grok` (+ `grok update`) |
-| OpenCode | 1.18.32 | `~/.opencode/bin/opencode` | `curl -fsSL https://opencode.ai/install \| bash` |
+| OpenCode | 1.18.33 | `~/.opencode/bin/opencode` | `curl -fsSL https://opencode.ai/install \| bash` |
 | Pi | 0.87.1 | `~/.local/bin/pi` | `npm install -g @earendil-works/pi-coding-agent` |
-| prime-agent | 0.9.5 | `~/.local/bin/prime-agent` | `npm install -g prime-agent` |
+| prime-agent | 0.9.7 | `~/.local/bin/prime-agent` | `npm install -g prime-agent` |
 | gnhf | 0.1.50 | `~/.local/bin/gnhf` | `npm install -g gnhf` |
-| herdr | 0.9.1 | `/opt/homebrew/bin/herdr` | `brew install herdr` |
-| treehouse | 3.1.0 | `~/.local/bin/treehouse` | GitHub release `kunchenguid/treehouse` |
-| no-mistakes | 1.79.0 | `~/.no-mistakes/bin/no-mistakes` | GitHub release `kunchenguid/no-mistakes` |
+| herdr | 0.9.3 | `/opt/homebrew/bin/herdr` | `brew install herdr` |
+| treehouse | 3.1.0 | `~/.local/bin/treehouse` | GitHub release `kunchenguid/treehouse` v3.1.0 |
+| no-mistakes | 1.84.0 | `~/.no-mistakes/bin/no-mistakes` | GitHub release `kunchenguid/no-mistakes` v1.84.0 |
 | acpx | 0.19.3 | `~/.local/bin/acpx` | `npm install -g acpx` |
 | gh-axi | 0.1.35 | `~/.local/bin/gh-axi` | `npm install -g gh-axi` |
+| chrome-devtools-axi | 0.1.35 | `~/.local/bin/chrome-devtools-axi` | `npm install -g chrome-devtools-axi` |
+| lavish-axi | 0.1.79 | `~/.local/bin/lavish-axi` | `npm install -g lavish-axi` |
 | tasks-axi | 0.2.6 | `~/.local/bin/tasks-axi` | `npm install -g tasks-axi` |
 | quota-axi | 0.1.55 | `~/.local/bin/quota-axi` | `npm install -g quota-axi` |
-| vite-plus (`vp`) | 1.0.0-rc.1 | `~/.local/share/vite-plus/bin/vp` | `curl -fsSL https://vite.plus/install.sh \| bash` |
+| vite-plus (`vp`) | 1.0.0 | `~/.local/share/vite-plus/bin/vp` | `curl -fsSL https://vite.plus/install.sh \| bash` |
 | gitnexus | 1.6.12 | npm global | `npm install -g gitnexus` |
 | agent-browser | 0.38.1 | npm global | `npm install -g agent-browser` |
+| skills CLI | 1.7.0 | npm global | `npm install -g skills` |
+| Node (vp) | v26.8.1 | via vp | `vp upgrade` |
+| pnpm (vp) | 12.6.0 | via vp | bundled |
+| Bun (vp) | 1.4.2 | `~/.local/share/vite-plus/bin/bun` | bundled |
 
 **npm global root**: `~/.local/lib/node_modules` (prefix `~/.local`).
 
@@ -53,4 +63,8 @@ Re-enable hosted connectors through Claude Code settings or vendor `claude mcp a
 npx -y skills add owner/repo -g -a "*" -y
 ```
 
-Sources listed in `config/skill-sources.txt` (29 packs on reference Mac).
+Sources listed in `config/skill-sources.txt` (30 packs on reference Mac).
+
+## Herdr and terminals
+
+See [HERDR.md](HERDR.md) and [panels.md](panels.md).

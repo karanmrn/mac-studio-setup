@@ -10,7 +10,7 @@ DOTFILES_REPO="${DOTFILES_REPO:-https://github.com/karanmrn/karan-herdr-shortcut
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/.dotfiles-karan}"
 FM_HOME="${FM_HOME:-$HOME/karan-agent-workspace}"
 TREEHOUSE_VERSION="${TREEHOUSE_VERSION:-v3.1.0}"
-NO_MISTAKES_VERSION="${NO_MISTAKES_VERSION:-v1.79.0}"
+NO_MISTAKES_VERSION="${NO_MISTAKES_VERSION:-v1.84.0}"
 
 log() { printf '[%s] %s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$*" | tee -a "$LOG"; }
 run() {
@@ -28,6 +28,36 @@ need_cmd() {
     return 1
   fi
   return 0
+}
+
+# Migration Assistant copies nix home-manager symlinks; targets under /nix/store vanish on a non-nix Mac.
+# A dangling path makes dotfiles `mkdir -p` fail (e.g. ~/.config/wezterm/wezterm.lua). Quarantine, never delete.
+quarantine_dangling_symlinks() {
+  local stamp root path target aside
+  stamp="$(date +%Y%m%d-%H%M%S)"
+  for root in \
+    "$HOME/.config" \
+    "$HOME/.local/bin" \
+    "$HOME/.claude" \
+    "$HOME/.codex" \
+    "$HOME/.grok" \
+    "$HOME/.cursor"; do
+    [ -d "$root" ] || continue
+    while IFS= read -r -d '' path; do
+      [ -L "$path" ] || continue
+      if [ -e "$path" ]; then
+        continue
+      fi
+      target="$(readlink "$path")"
+      aside="${path}.dangling-${stamp}"
+      if [ "$DRY_RUN" = "1" ]; then
+        log "DRY_RUN: quarantine dangling symlink '$path' -> '$target' as '$aside'"
+      else
+        log "quarantine dangling symlink '$path' -> '$target' as '$aside'"
+        mv "$path" "$aside"
+      fi
+    done < <(find "$root" -maxdepth 3 -type l -print0 2>/dev/null)
+  done
 }
 
 log "=== mac-studio-setup install (DRY_RUN=$DRY_RUN) ==="
@@ -53,6 +83,7 @@ if [ ! -d "$DOTFILES_DIR/.git" ]; then
 else
   log "skip dotfiles clone ($DOTFILES_DIR exists)"
 fi
+quarantine_dangling_symlinks
 if [ -x "$DOTFILES_DIR/install.sh" ]; then
   run "'$DOTFILES_DIR/install.sh'"
 fi
@@ -76,6 +107,28 @@ fi
 # --- Brewfile from this repo ---
 if [ -f "$REPO_ROOT/Brewfile" ]; then
   run "HOMEBREW_NO_AUTO_UPDATE=1 brew bundle install --file='$REPO_ROOT/Brewfile'"
+fi
+
+# --- Herdr (formula also in Brewfile; explicit for dry-run clarity) ---
+if need_cmd herdr; then
+  run 'brew install herdr'
+fi
+
+# --- Herdr config templates (never overwrite; dotfiles may symlink config.toml) ---
+REPO_HERDR="$REPO_ROOT/config/herdr"
+HERDR_CFG_DIR="$HOME/.config/herdr"
+if [ -d "$REPO_HERDR" ]; then
+  run "mkdir -p '$HERDR_CFG_DIR'"
+  for src in "$REPO_HERDR"/*; do
+    [ -f "$src" ] || continue
+    base="$(basename "$src")"
+    dest="$HERDR_CFG_DIR/$base"
+    if [ -e "$dest" ] || [ -L "$dest" ]; then
+      log "skip herdr config $base (already exists)"
+    else
+      run "cp '$src' '$dest'"
+    fi
+  done
 fi
 
 # --- Node toolchain via Vite+ (vp) ---
@@ -103,6 +156,7 @@ NPM_GLOBAL_PKGS=(
   'gh-axi'
   'gitnexus'
   'gnhf'
+  'lavish-axi'
   'prime-agent'
   'quota-axi'
   'skills'
