@@ -131,13 +131,13 @@ Update procedure: `scripts/update-all.sh` in this repo, plus the self-updaters l
 |-----------|-------------------------------------------|
 | Homebrew | 6.0.1 |
 | GitHub CLI (`gh`) | 2.101.0 |
-| Claude Code | 2.1.285 |
+| Claude Code | 2.1.284 |
 | Codex CLI | 0.158.0 |
 | OpenCode | 1.18.33 |
 | Pi | 0.87.1 |
 | Grok | 1.0.41 |
 | cursor-agent | 2026.09.28 |
-| Herdr | 0.9.3 |
+| Herdr | 0.9.1 |
 | no-mistakes | 1.84.0 |
 | treehouse | 3.1.0 |
 | prime-agent | 0.9.7 |

@@ -4,20 +4,20 @@ Reference versions after `scripts/update-all.sh` on **29 Sep 2026** (`data/deck/
 
 | Tool | Version (reference) | Path | Install method |
 |------|---------------------|------|----------------|
-| Homebrew | 6.0.1 | `/opt/homebrew/bin/brew` | brew installer |
-| GitHub CLI | 2.101.0 | `/opt/homebrew/bin/gh` | `brew install gh` |
-| Claude Code | 2.1.285 | `/opt/homebrew/bin/claude` | `brew install --cask claude-code@latest` |
-| Codex | 0.158.0 | `~/.local/bin/codex` | `npm install -g @openai/codex` |
-| cursor-agent | 2026.09.28 | `~/.local/bin/cursor-agent` | `curl -fsSL https://cursor.com/install \| bash` |
-| Grok | 1.0.41 | `~/.grok/bin/grok` | `npm install -g @xai-official/grok` (+ `grok update`) |
-| OpenCode | 1.18.33 | `~/.opencode/bin/opencode` | `curl -fsSL https://opencode.ai/install \| bash` |
-| Pi | 0.87.1 | `~/.local/bin/pi` | `npm install -g @earendil-works/pi-coding-agent` |
+| Homebrew | 7.0.7 | `/opt/homebrew/bin/brew` | brew installer |
+| GitHub CLI | 2.102.0 | `/opt/homebrew/bin/gh` | `brew install gh` |
+| Claude Code | 2.1.287 | `/opt/homebrew/bin/claude` | `brew install --cask claude-code@latest` |
+| Codex | 0.160.0 | `~/.local/bin/codex` | `npm install -g @openai/codex` |
+| cursor-agent | 2026.10.01 | `~/.local/bin/cursor-agent` | `curl -fsSL https://cursor.com/install \| bash` |
+| Grok | 1.0.44 | `~/.grok/bin/grok` | `npm install -g @xai-official/grok` (+ `grok update`) |
+| OpenCode | 1.18.34 | `~/.opencode/bin/opencode` | `curl -fsSL https://opencode.ai/install \| bash` |
+| Pi | 1.0.0 | `~/.local/bin/pi` | `npm install -g @earendil-works/pi-coding-agent` |
 | prime-agent | 0.9.7 | `~/.local/bin/prime-agent` | `npm install -g prime-agent` |
 | gnhf | 0.1.50 | `~/.local/bin/gnhf` | `npm install -g gnhf` |
 | herdr | 0.9.3 | `/opt/homebrew/bin/herdr` | `brew install herdr` |
 | treehouse | 3.1.0 | `~/.local/bin/treehouse` | GitHub release `kunchenguid/treehouse` v3.1.0 |
 | no-mistakes | 1.84.0 | `~/.no-mistakes/bin/no-mistakes` | GitHub release `kunchenguid/no-mistakes` v1.84.0 |
-| acpx | 0.19.3 | `~/.local/bin/acpx` | `npm install -g acpx` |
+| acpx | 0.19.4 | `~/.local/bin/acpx` | `npm install -g acpx` |
 | gh-axi | 0.1.35 | `~/.local/bin/gh-axi` | `npm install -g gh-axi` |
 | chrome-devtools-axi | 0.1.35 | `~/.local/bin/chrome-devtools-axi` | `npm install -g chrome-devtools-axi` |
 | lavish-axi | 0.1.79 | `~/.local/bin/lavish-axi` | `npm install -g lavish-axi` |
