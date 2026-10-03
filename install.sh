@@ -9,7 +9,7 @@ DRY_RUN="${INSTALL_DRY_RUN:-0}"
 DOTFILES_REPO="${DOTFILES_REPO:-https://github.com/karanmrn/karan-herdr-shortcut-setup.git}"
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/.dotfiles-karan}"
 FM_HOME="${FM_HOME:-$HOME/karan-agent-workspace}"
-TREEHOUSE_VERSION="${TREEHOUSE_VERSION:-v3.1.0}"
+TREEHOUSE_VERSION="${TREEHOUSE_VERSION:-v3.1.1}"
 NO_MISTAKES_VERSION="${NO_MISTAKES_VERSION:-v1.84.0}"
 
 log() { printf '[%s] %s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$*" | tee -a "$LOG"; }
@@ -150,6 +150,7 @@ NPM_GLOBAL_PKGS=(
   '@openai/codex'
   '@earendil-works/pi-coding-agent'
   '@xai-official/grok'
+  'backpass'
   'acpx'
   'agent-browser'
   'chrome-devtools-axi'
