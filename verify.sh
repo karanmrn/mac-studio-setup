@@ -51,6 +51,7 @@ for pair in \
   "gh-axi:gh-axi --version" \
   "tasks-axi:tasks-axi --version" \
   "acpx:acpx --version" \
+  "backpass:backpass --version" \
   "gnhf:gnhf --version" \
   "vp:vp --version"; do
   name="${pair%%:*}"

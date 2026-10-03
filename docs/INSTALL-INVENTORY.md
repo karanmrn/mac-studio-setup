@@ -95,9 +95,10 @@ Installed with `npm install -g <pkg>`. `install.sh` installs the **fleet core** 
 
 | Package | Version (ref) | Command |
 |---------|---------------|---------|
-| `@openai/codex` | 0.158.0 | `npm install -g @openai/codex` |
-| `@earendil-works/pi-coding-agent` (`pi`) | 0.87.1 | `npm install -g @earendil-works/pi-coding-agent` |
-| `@xai-official/grok` | 1.0.41 | `npm install -g @xai-official/grok` |
+| `@openai/codex` | 0.160.0 | `npm install -g @openai/codex` |
+| `@earendil-works/pi-coding-agent` (`pi`) | 1.0.0 | `npm install -g @earendil-works/pi-coding-agent` |
+| `@xai-official/grok` | 1.0.44 | `npm install -g @xai-official/grok` |
+| `backpass` | 0.1.32 | `npm install -g backpass` |
 | acpx | 0.19.3 | `npm install -g acpx` |
 | agent-browser | 0.38.1 | `npm install -g agent-browser` |
 | chrome-devtools-axi | 0.1.35 | `npm install -g chrome-devtools-axi` |
@@ -114,7 +115,7 @@ Installed with `npm install -g <pkg>`. `install.sh` installs the **fleet core** 
 
 ### Other globals on the MacBook (manual if needed)
 
-Examples from `npm ls -g --depth=0` not in `install.sh`: `@aqualia/alph-cli`, `@dbx-app/cli`, `backpass`, `carbonyl`, `cline`, `openwiki`, `pi-web-access`, etc. Install only if you still use them.
+Examples from `npm ls -g --depth=0` not in `install.sh`: `@aqualia/alph-cli`, `@dbx-app/cli`, `carbonyl`, `cline`, `openwiki`, `pi-web-access`, etc. Install only if you still use them.
 
 ---
 
@@ -122,9 +123,9 @@ Examples from `npm ls -g --depth=0` not in `install.sh`: `@aqualia/alph-cli`, `@
 
 | Tool | Version (ref) | Path | Install | `install.sh` |
 |------|---------------|------|---------|--------------|
-| cursor-agent | 2026.09.28 | `~/.local/bin/cursor-agent` | `curl -fsSL https://cursor.com/install \| bash` | auto |
-| OpenCode | 1.18.33 | `~/.opencode/bin/opencode` | `curl -fsSL https://opencode.ai/install \| bash` | auto |
-| treehouse | 3.1.0 | `~/.local/bin/treehouse` | Release tarball `kunchenguid/treehouse` `TREEHOUSE_VERSION=v3.1.0` | auto |
+| cursor-agent | 2026.10.01 | `~/.local/bin/cursor-agent` | `curl -fsSL https://cursor.com/install \| bash` | auto |
+| OpenCode | 1.18.34 | `~/.opencode/bin/opencode` | `curl -fsSL https://opencode.ai/install \| bash` | auto |
+| treehouse | 3.1.1 | `~/.local/bin/treehouse` | Release tarball `kunchenguid/treehouse` `TREEHOUSE_VERSION=v3.1.1` | auto |
 | no-mistakes | 1.84.0 | `~/.no-mistakes/bin/no-mistakes` | Release tarball `kunchenguid/no-mistakes` `NO_MISTAKES_VERSION=v1.84.0` | auto |
 
 Grok binary path after npm install: `~/.grok/bin/grok` (`grok update` in install.sh when present).
