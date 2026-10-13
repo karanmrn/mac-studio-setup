@@ -4,6 +4,8 @@ This repository installs the portable Codex and Herdr workflow on Apple Silicon 
 The default uses GPT-6.1 Sol with high reasoning where the account supports it.
 Firstmate remains the supervisor. Each worker uses an isolated worktree and its own delivery contract.
 
+Start with the [agent handover](docs/AGENT-HANDOVER.md) for the accepted install command, instruction reading order, and complete workflow contracts.
+
 ## Install from this private repository
 
 The repository remains private. Authenticate once with an account that can read this repository and `karanmrn/firstmate`.
@@ -85,6 +87,7 @@ Its old dry-run and verification behavior do not carry the portable profile's gu
 
 | Guide | Contents |
 | --- | --- |
+| [Agent handover](docs/AGENT-HANDOVER.md) | Accepted bootstrap, instruction owners, fresh-agent prompt, proof limits |
 | [Workflow](docs/HOW-WE-WORK.md) | Codex startup, workers, inboxes, validation, delivery, supervision |
 | [Herdr](docs/HERDR.md) | Terminal presentation, keys, lifecycle isolation, reconnect |
 | [Migration](docs/MIGRATION.md) | MacBook Air login and capacity checklist |
