@@ -1,92 +1,48 @@
-# Agent instruction files — layering
+# Agent instruction files
 
-How captain's machine wires **global** standards, **fleet** orchestration, and **project** rules. Sanitised copies live under `config/agents/` in this repo; live files stay in dotfiles and each git repo.
+Read the [agent handover](AGENT-HANDOVER.md) for the reading order and accepted bootstrap.
+The [complete global template](../config/agents/global-AGENTS.md) owns engineering standards and skill routing.
+The [pinned Firstmate charter](https://github.com/karanmrn/firstmate/blob/ab8d03ad1360baf4edeed3a1c57867d2e8237092/AGENTS.md) owns supervisor behavior.
+Each project's own `AGENTS.md` owns its project rules.
 
-## Layer model
+## Keep the instruction layers separate
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│  Project (e.g. pubmax) — nested AGENTS.md per directory     │
-│  Root index + area files; CLAUDE.md imports root only       │
-└───────────────────────────┬─────────────────────────────────┘
-                            │ nearest AGENTS.md wins for edits
-┌───────────────────────────▼─────────────────────────────────┐
-│  Fleet home (firstmate) — AGENTS.md = full job description  │
-│  CLAUDE.md → @AGENTS.md import (edit AGENTS.md only)       │
-└───────────────────────────┬─────────────────────────────────┘
-                            │ crewmates read project + global
-┌───────────────────────────▼─────────────────────────────────┐
-│  Global — ~/.dotfiles-karan/home/.config/agents/AGENTS.md   │
-│  Engineering bar, skill routing table, caveman style          │
-└───────────────────────────┬─────────────────────────────────┘
-                            │ symlinks (install.sh creates)
-        ┌───────────────────┼───────────────────┐
-        ▼                   ▼                   ▼
-   ~/.codex/AGENTS.md   ~/.grok/AGENTS.md   ~/.config/opencode/AGENTS.md
-   ~/.config/agents/AGENTS.md
-        │
-        ▼
-   ~/.claude/CLAUDE.md  → same global file on this fleet (dotfiles)
-```
+| Layer | Source and scope |
+| --- | --- |
+| Global | The reference source is `~/.dotfiles-karan/home/.config/agents/AGENTS.md`. Codex, Grok, and opencode share it through symlinks. |
+| Claude global | `~/.claude/CLAUDE.md` is a separate file with Claude-only skill routing and mirrored engineering standards. |
+| Firstmate home | `$FM_HOME/AGENTS.md` is the fleet charter. `$FM_HOME/CLAUDE.md` imports that charter with `@AGENTS.md`. |
+| Project | Read the root `AGENTS.md` and each nearer applicable `AGENTS.md` before editing that directory. |
+| Worker task | The generated launch brief sets the worker role, exact worktree, steering inbox, validation, and delivery contract. |
 
-**Caveman style** lives only in the global file: terse replies for chat, normal prose for code, commits, and PRs. Plugins **caveman@caveman** add harness integration; the policy text is in global `AGENTS.md`.
+Claude's global file and Firstmate's local import have different roles.
+Do not replace Claude's separate global file with a symlink to the shared global instructions.
+The [Firstmate import template](../config/agents/firstmate-CLAUDE.md) contains the local import pattern.
+A worker in a Firstmate worktree follows its launch brief's worker identity rather than becoming a supervisor.
 
-## Files on the reference Mac (Sep 2026)
+## Use the current writing standard
 
-| Path | Role |
-|------|------|
-| `~/.dotfiles-karan/home/.config/agents/AGENTS.md` | **Source of truth** for global standards |
-| `~/.config/agents/AGENTS.md` | Symlink → dotfiles global file |
-| `~/.codex/AGENTS.md` | Symlink → same |
-| `~/.grok/AGENTS.md` | Symlink → same |
-| `~/.config/opencode/AGENTS.md` | Symlink → same |
-| `~/.claude/CLAUDE.md` | Symlink → same (Claude-only routing can diverge on other machines; here it matches global) |
-| `~/karan-agent-workspace/AGENTS.md` | Firstmate orchestrator charter (~600 lines) |
-| `~/karan-agent-workspace/CLAUDE.md` | `<!-- @AGENTS.md -->` pointer only |
-| `~/Documents/projects/pubmaxx/AGENTS.md` | Pubmax root index (see below) |
+Simplified Technical English replaces the previous caveman style.
+Read `~/.codex/skills/asd-ste100/SKILL.md` before applying the skill to plans, updates, instructions, or reports.
+The global template gives the complete plain-writing rules and missing-skill procedure.
+The portable installer does not install that optional custom skill or a global skill collection.
+The [portable skills guide](PORTABLE-SKILLS.md) explains reviewed migration and preservation.
+Do not infer skill availability from a template reference.
 
-Repo copies: `config/agents/global-AGENTS.md`, `config/agents/firstmate-CLAUDE.md`.
+## Apply the templates deliberately
 
-## Firstmate pointer pattern
+The portable installer copies neither instruction template automatically.
+It does not run the reference dotfiles installer or create global instruction symlinks.
+Review the complete global template against the new machine's actual instruction files before an operator-approved application.
+Preserve Claude-only routing in Claude's separate file.
+Firstmate's pinned clone supplies its tracked charter and project skills.
+Use the actual local contracts after an approved source update.
+The [provenance guide](PORTABLE-PROVENANCE.md) records template sources and portable substitutions.
 
-Firstmate keeps **one** editable source:
+## Read project rules at the edit location
 
-- Edit `~/karan-agent-workspace/AGENTS.md` for orchestration law (spawn, merge, captain channel, secondmates).
-- `CLAUDE.md` is a one-line import so Claude Code loads the same file. Never duplicate rules in `CLAUDE.md`.
-
-This repo uses the same pattern: root `CLAUDE.md` imports `AGENTS.md`.
-
-## Pubmax nested `AGENTS.md` (convention only)
-
-Product rules are **not** copied into mac-studio-setup. Pubmax uses a **tree of area files**:
-
-| File | Owns |
-|------|------|
-| `AGENTS.md` (repo root) | Index and fleet-wide laws |
-| `app/AGENTS.md` | Routes, API, CSP |
-| `components/AGENTS.md` | Map UI and chrome |
-| `lib/AGENTS.md` | Policy leaves and stores |
-| `lib/harvest/AGENTS.md` | Pointer into `scripts/` |
-| `__tests__/AGENTS.md` | Unit harness and fences |
-| `e2e/AGENTS.md` | Playwright |
-| `scripts/AGENTS.md` | CLIs and deploy |
-| `supabase/AGENTS.md` | Migrations and RLS |
-| `ios/AGENTS.md` / `android/AGENTS.md` | Capacitor shells |
-| `docs/AGENTS.md` | Copy and metrics language |
-| `data/AGENTS.md` / `public/data/AGENTS.md` | Datasets |
-| `perf/AGENTS.md` | Performance ceilings |
-
-`CLAUDE.md` at pubmax root imports **only** root `AGENTS.md`. Tests enforce the tree (`agentsMdTree`, `agentsMdPointers`).
-
-## mac-studio-setup project memory
-
-This repo's `AGENTS.md` is **project memory** for bootstrap and migration (short, durable notes). It is not the global or firstmate charter.
-
-## After clone on Mac Studio
-
-1. Run `install.sh` (dotfiles + symlinks).
-2. Confirm: `ls -la ~/.codex/AGENTS.md ~/.grok/AGENTS.md ~/.config/opencode/AGENTS.md`.
-3. Open firstmate: `cd ~/karan-agent-workspace` and use Claude Code there.
-4. Open pubmax in a worktree; read nearest `AGENTS.md` before editing.
-
-Optional **nix** path: see [docs/KUNCHEN-STACK.md](KUNCHEN-STACK.md). Captain's dotfiles today are **git clone + install.sh** (`karan-herdr-shortcut-setup`), not full nix-darwin; Homebrew remains default.
+This setup repository's [AGENTS.md](../AGENTS.md) is project memory for bootstrap and migration.
+It is not the global standards file or the Firstmate charter.
+Another registered project supplies its own root and nested instruction files.
+Do not copy another project's instructions into this repository or assume a particular nested layout.
+Read that project's actual `CLAUDE.md` imports when using Claude Code.

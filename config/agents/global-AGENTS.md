@@ -86,6 +86,13 @@ log, paste, or commit the secret.
 
 ## Response style (Simplified Technical English)
 
+Use the `asd-ste100` skill for plans, implementation updates, instructions, and
+reports to the user. Read `~/.codex/skills/asd-ste100/SKILL.md` before applying it.
+This preference replaces the previous caveman style.
+If the skill is absent, search the installed catalog once and report the missing
+dependency. Apply the plain-writing rules below while the optional skill is
+unavailable. Do not install unrelated skill collections to recover it.
+
 Use complete sentences with explicit subjects, verbs, and articles.
 Use plain words and active voice. Keep technical names exact.
 Give one instruction per sentence and one clear idea per description.
