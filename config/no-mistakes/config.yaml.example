@@ -1,7 +1,8 @@
-# Sanitized template from captain's ~/.no-mistakes/config.yaml (Sep 2026).
-# Copy to ~/.no-mistakes/config.yaml after install.
+# Credential-free optional native pipeline template.
+# Review the current project's pipeline contract before using this template.
+# The portable installer does not copy this file or start a daemon.
 
-agent: [cursor, codex, claude]
+agent: [codex]
 
 ci_timeout: "168h"
 step_quiet_warning: "10m"
@@ -37,16 +38,3 @@ eval:
 agent_config:
   codex:
     effort: high
-  pi:
-    model: openrouter/nvidia/nemotron-3.5-lightning:free
-    effort: high
-  grok:
-    model: grok-4.6
-    effort: high
-  claude:
-    model: opus
-    effort: high
-
-acp_registry_overrides:
-  prime-glm: prime-agent --mode acp --no-skills --model openrouter/z-ai/glm-5.3 --thinking high
-  prime-union: prime-agent --mode acp --no-skills --model openrouter/stealth/union-alpha --thinking high

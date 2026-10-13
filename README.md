@@ -1,102 +1,99 @@
-# Mac Studio Setup
+# Mac Studio and MacBook Air setup
 
-Reproducible bootstrap for the captain's Apple Silicon dev machine: Homebrew, terminals (WezTerm + Ghostty via dotfiles), agent CLIs, Firstmate fleet layout, Herdr command deck, skills catalog, and pubmax self-hosted runners.
+This repository installs the portable Codex and Herdr workflow on Apple Silicon macOS.
+The default uses GPT-6.1 Sol with high reasoning where the account supports it.
+Firstmate remains the supervisor. Each worker uses an isolated worktree and its own delivery contract.
 
-## Moving day (three commands)
+## Install from this private repository
 
-After Homebrew, `gh auth login`, and cloning this repo:
+The repository remains private. Authenticate once with an account that can read this repository and `karanmrn/firstmate`.
+Install Homebrew through [the official Homebrew instructions](https://brew.sh) first.
 
-```bash
-~/mac-studio-setup/install.sh
-# copy keys.env into ~/karan-agent-workspace/data/ (see docs/MIGRATION.md)
-~/mac-studio-setup/verify.sh
-```
+1. Install GitHub CLI.
 
-Dry run: `INSTALL_DRY_RUN=1 ~/mac-studio-setup/install.sh`
+   ```bash
+   brew install gh
+   ```
 
-## Table of contents
+2. Authenticate GitHub and configure its credential helper.
 
-| Doc | Contents |
-|-----|----------|
-| [sol6.md](sol6.md) | Fleet handover: executed work, queue, Studio cutover |
-| [docs/MIGRATION.md](docs/MIGRATION.md) | MacBook → Studio checklist, sign-ins, projects |
-| [docs/HERDR.md](docs/HERDR.md) | Exact Herdr + WezTerm setup and command deck |
-| [docs/INSTALL-INVENTORY.md](docs/INSTALL-INVENTORY.md) | Every package and install command |
-| [docs/AGENT-INSTRUCTIONS.md](docs/AGENT-INSTRUCTIONS.md) | Global vs firstmate vs pubmax `AGENTS.md` layering |
-| [docs/SKILLS.md](docs/SKILLS.md) | Full skill inventory by upstream (generated from lock file) |
-| [docs/KUNCHEN-STACK.md](docs/KUNCHEN-STACK.md) | Kunchen Guid tools, dotfiles credit, optional nix |
-| [docs/HOW-WE-WORK.md](docs/HOW-WE-WORK.md) | Captain laws, daily rhythm, Sep 2026 fleet history |
-| [docs/ORCHESTRATION.md](docs/ORCHESTRATION.md) | Firstmate brief/spawn/watcher/away mode |
-| [docs/SUBSCRIPTIONS.md](docs/SUBSCRIPTIONS.md) | Paid/free services and quota routing |
-| [docs/UPDATING.md](docs/UPDATING.md) | Daily `update-all.sh` and defer rules |
-| [docs/FIRSTMATE.md](docs/FIRSTMATE.md) | Roles and captain law summary |
-| [docs/AGENTS-AND-TOOLS.md](docs/AGENTS-AND-TOOLS.md) | CLI versions and install paths |
-| [docs/SECRETS.md](docs/SECRETS.md) | Key **names** only |
-| [docs/panels.md](docs/panels.md) | Herdr command deck |
+   ```bash
+   gh auth login
+   gh auth setup-git
+   ```
 
-## Quick start (private repo)
+3. Fetch the bootstrap at a reviewed commit.
+   Replace `SOURCE_SHA` with the full source commit from the PR or the merged source.
 
-**Step 1 — Homebrew and GitHub CLI**
+   ```bash
+   SOURCE_SHA=REVIEWED_40_CHARACTER_COMMIT
+   gh api "repos/karanmrn/mac-studio-setup/contents/bootstrap.sh?ref=$SOURCE_SHA" \
+     --header 'Accept: application/vnd.github.raw+json' > /tmp/mac-setup-bootstrap.sh
+   bash /tmp/mac-setup-bootstrap.sh --ref "$SOURCE_SHA" --dry-run
+   bash /tmp/mac-setup-bootstrap.sh --ref "$SOURCE_SHA"
+   ```
 
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install gh
-```
+4. Read the [workflow guide](docs/HOW-WE-WORK.md) for login, hook review, startup, and project registration.
 
-**Step 2 — Authenticate GitHub**
+The authenticated GitHub command replaces an anonymous curl command for private source.
+The bootstrap verifies the Git checkout against the supplied commit.
+No token appears in a clone URL or copied config.
+Firstmate owns merge and publication of the stable install command.
 
-```bash
-gh auth login
-```
+You can also clone this repository, check out the reviewed commit, and run `bash install.sh`.
+The bootstrap keeps each setup revision under `~/.local/share/mac-studio-setup/<commit>`.
 
-**Step 3 — Clone and install**
+## Repeat and upgrade
 
 ```bash
-gh repo clone karanmrn/mac-studio-setup ~/mac-studio-setup
-~/mac-studio-setup/install.sh
+bash install.sh --dry-run
+bash install.sh --config-only
+bash install.sh --upgrade
+bash install.sh --replace-config --dry-run
+bash install.sh --replace-config
+bash verify.sh
 ```
 
-**Step 4 — Verify**
+`--config-only` installs templates without packages or a Firstmate clone.
+It supports isolated fixtures. It does not establish a complete working installation.
+Existing configs remain intact unless you request `--replace-config`.
+Each replacement has a timestamped backup under `~/.local/state/mac-studio-setup/backups`.
+Linked parent directories cause a refusal. The installer never writes through another config owner's symlink.
 
-```bash
-~/mac-studio-setup/verify.sh
-```
+`--upgrade` repeats the reviewed package pins. It does not run broad package updates or restart services.
+Use a newer reviewed setup commit to change those pins.
+An existing Firstmate clone at another revision requires its own update procedure.
 
-### Clone without `gh` (HTTPS + token)
+## Portable core and optional services
 
-```bash
-export GITHUB_TOKEN="<github-pat>"   # fine-grained or classic with repo scope; never commit
-git clone "https://${GITHUB_TOKEN}@github.com/karanmrn/mac-studio-setup.git" ~/mac-studio-setup
-~/mac-studio-setup/install.sh
-unset GITHUB_TOKEN
-```
+The core installs Codex, Herdr, Treehouse, WezTerm, fonts, and the Firstmate command dependencies.
+Node, Python, jq, and ripgrep use Homebrew's checked packages.
+Codex and AXI packages use explicit npm versions and registry integrity verification.
+Herdr and Treehouse use versioned release assets with pinned SHA-256 checksums.
 
-## Scripts
+The core requires GitHub access and a supported Codex login.
+Other model providers, paid research services, runners, databases, and device rigs are optional.
+The core does not install global skills packs, copy credentials, activate hooks, or start a daemon.
+Use `--with-pipeline` to install the pinned no-mistakes binary when a project requires native pipeline delivery.
+That option does not initialize a project or start the shared daemon.
 
-| Script | Purpose |
-|--------|---------|
-| `install.sh` | Idempotent bootstrap (no sudo) |
-| `verify.sh` | Green/red checks |
-| `scripts/update-all.sh` | Daily harness + skills update |
-| `scripts/reinstall-skills.sh` | Full skills.sh packs + gstack + plugins |
-| `scripts/build-command-deck.sh` | Herdr deck panes |
-| `scripts/install-runners.sh` | GitHub Actions self-hosted runners |
+The historical Studio bundle remains available through `bash install.sh --studio`.
+It includes broad tools, project clones, and skill packs. Review it before use.
+Its old dry-run and verification behavior do not carry the portable profile's guarantees.
 
-## GitHub Actions runners
+## Documentation
 
-```bash
-~/mac-studio-setup/scripts/install-runners.sh
-```
+| Guide | Contents |
+| --- | --- |
+| [Workflow](docs/HOW-WE-WORK.md) | Codex startup, workers, inboxes, validation, delivery, supervision |
+| [Herdr](docs/HERDR.md) | Terminal presentation, keys, lifecycle isolation, reconnect |
+| [Migration](docs/MIGRATION.md) | MacBook Air login and capacity checklist |
+| [Firstmate](docs/FIRSTMATE.md) | Supervisor and worker boundaries |
+| [Orchestration](docs/ORCHESTRATION.md) | Brief, spawn, status, guarded merge owners |
+| [Provenance](docs/PORTABLE-PROVENANCE.md) | Source revisions, allowlisted fields, portable substitutions |
+| [Validation](docs/PORTABLE-VALIDATION.md) | Reproduction, isolated tests, proof limits |
+| [Skills](docs/PORTABLE-SKILLS.md) | Source metadata and custom skill preservation |
+| [Updating](docs/UPDATING.md) | Portable updates and historical Studio updates |
 
-## Secret scan before push
-
-```bash
-git diff | rg 'sk_|tvly-|ghp_|gho_|xoxb|AKIA|eyJ|-----BEGIN' && echo BAD || echo OK
-```
-
-## Config templates
-
-- `config/agents/` — sanitised global `AGENTS.md` and firstmate `CLAUDE.md` pointer
-- `config/no-mistakes/config.yaml.example`
-- `config/claude/settings.json.example`, `statusline.sh`
-- `config/skill-sources.txt` — skills.sh pack list
+The older inventory, subscriptions, secrets, panels, and `sol6.md` files are historical Studio references.
+They do not define the portable install requirements.

@@ -30,7 +30,6 @@ rows = [
     { token = "workspace", bold = true, rules = [
       { equals = "karan-agent-workspace", fg = "#f5c2e7", bold = true },
       { starts_with = "2ndmate-", fg = "#fab387", bold = true },
-      { equals = "pubmaxx", fg = "#a6e3a1" },
     ] },
     "tab",
   ],
@@ -54,3 +53,7 @@ rows = [
   ],
   [{ token = "terminal_title_stripped", dim = true }],
 ]
+
+[theme]
+name = "catppuccin"
+auto_switch = false

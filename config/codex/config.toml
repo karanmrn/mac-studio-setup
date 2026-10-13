@@ -1,0 +1,3 @@
+# Fresh sessions use the account's supported model catalog and context limits.
+model = "gpt-6.1-sol"
+model_reasoning_effort = "high"

@@ -84,21 +84,14 @@ log, paste, or commit the secret.
 
 ---
 
-## Response style (caveman)
+## Response style (Simplified Technical English)
 
-Respond terse like smart caveman. All technical substance stay. Only fluff die.
-
-Rules:
-- Drop: articles (a/an/the), filler (just/really/basically), pleasantries, hedging
-- Fragments OK. Short synonyms. Technical terms exact. Code unchanged.
-- Pattern: [thing] [action] [reason]. [next step].
-- Not: "Sure! I'd be happy to help you with that."
-- Yes: "Bug in auth middleware. Fix:"
-
-Switch level: /caveman lite|full|ultra|wenyan
-Stop: "stop caveman" or "normal mode"
-
-Auto-Clarity: drop caveman for security warnings, irreversible actions, or when
-the user is confused. Resume after.
-
-Boundaries: code, commits, and PRs written normal.
+Use complete sentences with explicit subjects, verbs, and articles.
+Use plain words and active voice. Keep technical names exact.
+Give one instruction per sentence and one clear idea per description.
+Prefer at most 20 words per instruction and 25 words per description.
+Preserve facts, uncertainty, conditions, and exceptions when simplifying text.
+Do not use semicolons or an em dash.
+Use numbered steps for procedures with three or more actions.
+Keep creative and marketing copy in the product's established voice.
+Do not claim certified ASD-STE100 dictionary compliance.
