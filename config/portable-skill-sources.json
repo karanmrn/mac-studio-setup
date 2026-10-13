@@ -1,0 +1,37 @@
+{
+  "gh-axi": {
+    "source": "kunchenguid/gh-axi",
+    "sourceType": "github",
+    "sourceUrl": "https://github.com/kunchenguid/gh-axi.git",
+    "skillPath": "skills/gh-axi/SKILL.md",
+    "skillFolderHash": "fb1513412c752b6642ec67295b1c484465eb4698"
+  },
+  "chrome-devtools-axi": {
+    "source": "kunchenguid/chrome-devtools-axi",
+    "sourceType": "github",
+    "sourceUrl": "https://github.com/kunchenguid/chrome-devtools-axi.git",
+    "skillPath": "skills/chrome-devtools-axi/SKILL.md",
+    "skillFolderHash": "741c529ebbdc9f62c9362593701a6968267af6e6"
+  },
+  "unslop": {
+    "source": "backnotprop/pstack",
+    "sourceType": "github",
+    "sourceUrl": "https://github.com/backnotprop/pstack.git",
+    "skillPath": "skills/unslop/SKILL.md",
+    "skillFolderHash": "4e572dd70e5557f490e3991c52ea58f0dcee8936"
+  },
+  "tdd": {
+    "source": "mattpocock/skills",
+    "sourceType": "github",
+    "sourceUrl": "https://github.com/mattpocock/skills.git",
+    "skillPath": "skills/engineering/tdd/SKILL.md",
+    "skillFolderHash": "667dbdd00c09d0e2189e082986e6a4d61a67c2a6"
+  },
+  "verification-before-completion": {
+    "source": "obra/superpowers",
+    "sourceType": "github",
+    "sourceUrl": "https://github.com/obra/superpowers.git",
+    "skillPath": "skills/verification-before-completion/SKILL.md",
+    "skillFolderHash": "a4cb0b69aaefeab540947a7f1642bdaad810e37a"
+  }
+}
